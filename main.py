@@ -27,9 +27,6 @@ def show_game():
         for char in line:
             print(char)
 
-def changes_letter(guess):
-    letter = guess
-
 
 def checks_letter_guessed(guess):
     # checks if letter is in alphabet
