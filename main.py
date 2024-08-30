@@ -1,9 +1,13 @@
 # WORD TO BE GUESSED
         # HAVE BANK OF WORDS AND INSTEAD OF ENTERING, IT AUTO PICKS RANDOM WORD AND STARTS
-word_to_be_guessed = None
+word_to_be_guessed = ['h','e','l','l','o']
+state_of_guessed = ['_','_','_','_','_']
 
 # GUESSED
 letters_guessed = []
+
+# ALPHABET
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 
 # LIST PER LINE FOR THING THAT HANGS PERSON/ PERSON
@@ -23,25 +27,55 @@ def show_game():
         for char in line:
             print(char)
 
+def changes_letter(guess):
+    letter = guess
+
+
 def checks_letter_guessed(guess):
-    if guess in letters_guessed:
-        return True
+    # checks if letter is in alphabet
+    if guess in alphabet:
+        if guess not in letters_guessed:
+            letters_guessed.append(guess)
+            if guess in word_to_be_guessed:
+                return True
+                
+            else:
+                return False
+        else:
+            print('LETTER ALREADY GUESSED')
     else:
-        return False
+        print('ENTER VALID LETTER')
+
+def updates_word_state(guess):
+    indx_of_guess = 0
+
+    for char in word_to_be_guessed:
+       indx_of_guess += 1
+       if char == guess: 
+        new_indx = indx_of_guess - 1
+        state_of_guessed[new_indx] = guess
+        
+
+         
+            
+    
     
 def guess_promt():
-    guess = input('ENTER GUESS: ')
+    guess = input('ENTER GUESS: ').lower()
 
-     # checks if guess is valid(re-used, symbol, ect)
-    if checks_letter_guessed(guess) == False:
-        letters_guessed.append(guess)
-        # check if guess is correct
-        # if correct, shows letter in word to guess
+    is_correct = checks_letter_guessed(guess)
+
+    if is_correct:
+        print('correct')
+        updates_word_state(guess)
+       
+    else:
+        print('incorrect')
+
+
             # calls to show updated game and promts guess again
         # if not correct, tells user, calls to check/update person, calls to show updated game and promts guess again
-        
-    else:
-        print('already guessed!')
+       
 
 def start_game():
     # show underscores of each letter
@@ -106,10 +140,10 @@ def add_back():
 
     # LEGS
 def add_right_leg():
-    ["    |      \\"]
+    return ["    |      \\"]
 
 def add_full_legs():
-    ["    |    / \\"]
+    return ["    |    / \\"]
 
         
 
